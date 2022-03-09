@@ -1,4 +1,4 @@
-module github.com/Rinshad/webhook-repo
+module github.com/Rinshad/webhook-repo/webhook
 
 go 1.15
 
