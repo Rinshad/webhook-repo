@@ -1,15 +1,15 @@
-# Builder Image
+# Base Image
 FROM golang:1.15.2 as builder
 
-# create and set working directory
+#working directory
 RUN mkdir -p /app
 WORKDIR /app
 
-# install dependencies
+# Dependecy installation
 ADD go.mod go.mod
 ADD go.sum go.sum
 RUN go mod download
-# add code
+# Copy code
 ADD . .
 # build the source
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main main.go
