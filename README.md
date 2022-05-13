@@ -1,2 +1,2 @@
 # webhook-repo
-Kubernetes mutating webhook code
+Kubernetes mutating webhook sample code
