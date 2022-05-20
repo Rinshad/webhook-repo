@@ -1,0 +1,26 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: "www.hello-webhook.com"
+  namespace: ns-webhook
+  annotations:
+    cert-manager.io/inject-ca-from: ns-webhook/my-webhook-certificate
+webhooks:
+- name: "www.hello-webhook.com"
+  objectSelector:
+    matchLabels:
+      hello: "true"
+  rules:
+  - apiGroups:   [""]
+    apiVersions: ["v1"]
+    operations:  ["CREATE"]
+    resources:   ["pods"]
+    scope:       "Namespaced"
+  clientConfig:
+    service:
+      namespace: "ns-webhook"
+      name: "hello-webhook-service"
+      path: /mutate
+  admissionReviewVersions: ["v1", "v1beta1"]
+  sideEffects: None
+  timeoutSeconds: 10
